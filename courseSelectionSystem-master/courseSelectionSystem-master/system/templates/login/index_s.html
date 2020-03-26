@@ -1,0 +1,138 @@
+<meta charset="utf-8">
+<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
+{% extends 'base_stu.html' %}
+{% block title %}主页{% endblock %}
+{% block content %}
+    <style>
+    body{
+        background:url("../../../static/img/004.jpg")no-repeat center center fixed;
+        background-size:100%;
+    }
+    </style>
+<script>
+    function de(e){
+        alert(e)
+    }
+</script>
+    {% if request.session.is_login %}
+    {# <h1>你好,{{ request.session.user_name }}同学！欢迎回来！</h1> #}
+    <div>
+        <div id="lookdata" style="width: 600px;height: 300px;"></div>
+        <div id="grades" style="width: 600px;height: 300px;"></div>
+        <div id="course" style="width: 600px;height: 300px;"></div>
+        <div id="recommend" style="width: 600px;height: 300px;"></div>
+        <div id="yuanxi" style="width: 600px;height: 300px;"></div>
+    </div>
+
+    {% else %}    <h1>你尚未登录，只能访问公开内容！</h1>
+    {% endif %}
+{% load staticfiles %}
+
+<script src="{% static 'js/loginDate.js' %}"></script>
+<script>
+var myChart=echarts.init(document.getElementById("grades"));
+    var option={
+        title:{
+          text:'学生选修成绩'
+        },
+        toolbox:{
+            show:true,
+            feature:{
+                saveAsImage:{
+                    show:true
+                }
+            }
+        },
+        legend:{
+            data:['时间']
+        },
+        xAxis:{
+            data:["第一学期","第二学期","第三学期","第四学期","第五学期","第六学期","第七学期","第八学期"]
+        },
+        yAxis:{},
+        series:[{
+            name:'学生选修成绩',
+            type:'line',
+            axisLabel:{interval:1},
+            data:[80,95,90,65,55,70,89,79]
+        }]
+    };
+    myChart.setOption(option);
+</script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('recommend'));
+        myChart.setOption({
+            title:{
+              text:'自主推荐课程'
+            },
+            series : [
+                {
+                    name: '自主推荐课程',
+                    type: 'pie',    // 设置图表类型为饼图
+                    radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                    data:[          // 数据数组，name 为数据项名称，value 为数据项值
+                        {value:235, name:'生物'},
+                        {value:274, name:'现代音乐赏析'},
+                        {value:310, name:'心理选修'},
+                        {value:335, name:'古代诗文鉴赏'},
+                        {value:400, name:'俄语'}
+                    ]
+                }
+            ]
+        })
+    </script>
+<script>
+var myChart = echarts.init(document.getElementById('yuanxi'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '院系学生统'
+            },
+            tooltip: {},
+            legend: {
+                data:['人数']
+            },
+            xAxis: {
+                data: ["计算机系","计算机系","计算机系","计算机系","计算机系","计算机系"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+<script>
+var myChart = echarts.init(document.getElementById('course'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '课程统计图'
+            },
+            tooltip: {},
+            legend: {
+                data:['人数']
+            },
+            xAxis: {
+                data: ["日语","心理学","哲学","现代音乐鉴赏","诗文赏析","健身操"]
+            },
+            yAxis: {},
+            series: [{
+                name: '人数',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+{% endblock %}

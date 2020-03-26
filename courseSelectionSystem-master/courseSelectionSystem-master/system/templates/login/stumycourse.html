@@ -1,0 +1,102 @@
+<meta charset="utf-8">
+{% extends 'base_stu.html' %}
+{% block title %}个人课表{% endblock %}
+{% block content %}
+    <style>
+        body{
+            background: url("../../../static/img/001.jpg") no-repeat center center fixed;
+            background-size: 100%;
+            height: 400px;
+            font-size: 18px;
+        }
+        .head{
+            width:100%;
+            text-align: center;
+        }
+        .tabtop {
+            margin-top: 13px;
+        }
+        .tabtop td{
+            background-color:#ffffff;
+            height:25px;
+            line-height:150%;
+            text-align:center
+        }
+        .font-center{ text-align:center}
+
+        .btbg{background:#e9faff !important;}
+
+        .titfont {
+
+            font-family: 微软雅黑;
+            font-size: 16px;
+            font-weight: bold;
+            color: #255e95;
+            background: url(../images/ico3.gif) no-repeat 15px center;
+            background-color:#e9faff;
+        }
+    </style>
+
+<div id="bg">
+    <div CLASS="head">
+        <h2>个人课表</h2>
+    </div>
+    <div class="inf">
+        {% csrf_token %}
+
+        <table width=80%  bgcolor="#cccccc" class="tabtop" align="center" cellspacing="1" cellpadding="4" border="0">
+            <tr>
+                <td class="btbg font-center titfont">时间\日期</td>
+                <td class="btbg font-center titfont">1</td>
+                <td class="btbg font-center titfont">2</td>
+                <td class="btbg font-center titfont">3</td>
+                <td class="btbg font-center titfont">4</td>
+                <td class="btbg font-center titfont">5</td>
+
+            </tr>
+            <tr>
+                <td class="btbg font-center titfont" rowspan="2">上午</td>
+                <td class="btbg font-center titfont">语文</td>
+                <td class="btbg font-center titfont">数学</td>
+                <td class="btbg font-center titfont">英语</td>
+                <td class="btbg font-center titfont">美术</td>
+                <td class="btbg font-center titfont">音乐</td>
+
+            </tr>
+            <tr>
+
+                <td class="btbg font-center titfont">语文</td>
+                <td class="btbg font-center titfont">数学</td>
+                <td class="btbg font-center titfont">英语</td>
+                <td class="btbg font-center titfont">美术</td>
+                <td class="btbg font-center titfont">音乐</td>
+
+            </tr>
+            <tr>
+
+                <td colspan="6"> </td>
+
+                </tr>
+            <tr>
+                <td class="btbg font-center titfont" rowspan="2">上午</td>
+                <td class="btbg font-center titfont">语文</td>
+                <td class="btbg font-center titfont">数学</td>
+                <td class="btbg font-center titfont">英语</td>
+                <td class="btbg font-center titfont">美术</td>
+                <td class="btbg font-center titfont">音乐</td>
+
+            </tr>
+            <tr>
+
+                <td class="btbg font-center titfont">语文</td>
+                <td class="btbg font-center titfont">数学</td>
+                <td class="btbg font-center titfont">英语</td>
+                <td class="btbg font-center titfont">美术</td>
+                <td class="btbg font-center titfont">音乐</td>
+
+            </tr>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,213 @@
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+{% extends 'base_tea.html' %}
+{% block title %}登记成绩{% endblock %}
+{% block content %}
+    <style>
+        body{
+            background: url("../../../static/img/003.jpg") no-repeat center center fixed;
+            background-size: 100%;
+            height: 400px;
+            font-size: 18px;
+        }
+
+        .find{
+            width:350px;
+            height: 300px;
+            margin-right: 10%;
+            margin-top: 1%;
+            float: right;
+
+            background-color: rgba(130 ,200 ,200,0.2);
+
+        }
+        .find p{
+            margin-top: 40px;
+            margin-left: 20%;
+        }
+
+        .find form{
+            margin-left: 20%;
+        }
+        .btn input{ /*设置两个按钮的宽高、边距及边框样式*/
+            width: 50px;
+            height: 24px;
+            margin-right: 50px;
+            background:#87CEFF;
+            border-radius: 20px;
+        }
+        .btn0{
+           font-size: 16px;
+            margin-right: 50px;
+            background: #87CEFF;
+            border-radius: 20px;
+        }
+        #btnt{
+            {#position: absolute;#}
+            width: 80px;
+            {#top: 380px;#}
+            {#left: 300px;#}
+            margin-top: 20%;
+            margin-left: 10%;
+            font-size: 16px;
+             background: #87CEFF;
+            border-radius: 20px;
+        }
+        #btnq{
+             {#position: absolute;#}
+            width: 80px;
+            margin-top: 20%;
+
+            {#top: 380px;#}
+            {#left: 200px;#}
+            font-size: 16px;
+             background: #87CEFF;
+            border-radius: 20px;
+        }
+        .b{
+
+            margin-top: 40px;
+            margin-left: 25%;
+        }
+        .inf{
+            margin-top:1% ;
+            margin-left: 15%;
+            width: 200px;
+            height: 400px;
+            float: left;
+
+        }
+        .guodong{
+            width: 800px;
+            height: 350px;
+            overflow: auto;
+        }
+        .btn2{
+             width: 120px;
+            height: 50px;
+            background: #87CEFF;
+            border-radius: 20px;
+            position: absolute;
+            left:100px;
+            top:570px;
+            font-size: 18px;
+        }
+        .tian{
+
+            position: absolute;
+            top:160px;
+            right: 120px;
+             width: 100px;
+            height: 35px;
+            background: #87CEFF;
+            border-radius: 20px;
+            font-size: 16px;
+
+        }
+        .head{
+            position: relative;
+            text-align: center;
+            margin-top:50px ;
+
+        }
+        #bg{
+            width: 100%;
+            height: 300px;
+            position: static;
+        }
+         table
+        {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+              overflow: auto;
+        }
+        table td, table th
+        {
+            border: 1px solid #cad9ea;
+            color: black;
+            height: 30px;
+        }
+        table thead th
+        {
+            background-color: #CCE8EB;
+            width: 100px;
+        }
+        table tr:nth-child(odd)
+        {
+            background: #63B8FF;
+        }
+        table tr:nth-child(even)
+        {
+            background: #87CEFF;
+        }
+    </style>
+
+<div id="bg">
+        <div CLASS="head">
+        <h2>登记成绩</h2>
+</div>
+    <div class="inf">
+        <h3>已开设课程信息表</h3>
+        {% csrf_token %}
+        <div class="guodong">
+        <table border="1">
+                <tr>
+                    <td>课&nbsp&nbsp程&nbsp&nbsp代&nbsp&nbsp号</td>
+                     <td>课&nbsp&nbsp程&nbsp&nbsp名&nbsp&nbsp称</td>
+                    <td>开&nbsp&nbsp始&nbsp&nbsp时&nbsp&nbsp间</td>
+                    <td>结&nbsp&nbsp束&nbsp&nbsp时&nbsp&nbsp间</td>
+                    <td>课&nbsp&nbsp时&nbsp&nbsp条&nbsp&nbsp数</td>
+                    <td>最&nbsp&nbsp大&nbsp&nbsp人&nbsp&nbsp数</td>
+                    <td>课&nbsp程&nbsp学&nbsp分</td>
+                    <td>授&nbsp课&nbsp教&nbsp师</td>
+                     <td>操&nbsp&nbsp作</td>
+
+
+                </tr>
+            {% for course in course_inform %}
+            <tr>
+                     <td >{{ course.id }}</td>
+                    <td>{{ course.courseName }}</td>
+                    <td>{{ course.courseStartTime}}</td>
+                    <td>{{ course.courseOverTime}}</td>
+                    <td>{{ course.courseClassNum}}</td>
+                    <td>{{ course.courseMaxNum}}</td>
+                    <td>{{ course.courseCredit}}</td>
+                    <td>{{ course.courseTeacher.teacherName}}</td>
+                     <td>
+                           <input type="submit" value="修改"   >
+
+
+                         <button  type="submit" onclick="de({{ course.id}})" formmethod="post">删除</button>
+                     </td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+
+    </div>
+ <div class="find">
+
+        <p>请输入课程代号：</p><br>
+            <form action="/tea2/" method="post">
+                {% csrf_token %}
+                 <input type="text" name="course_id"value="{{ course_id }}" formmethod="post" style="font-size: 18px ;width: 150px">
+                <input type="submit" value="确认"   class="btn0">
+            </form>
+             {# <input type="submit" value="登记成绩" formaction="/reg_score/" formmethod="get"class="btn0"> #}
+    </div>
+    </div>
+<script>
+    function de(e) {
+           $.ajax({
+               url:'/deleClass/',
+               type:'get',
+               data:{userid:e},
+               success:function(data){
+                   console.log(data)
+               },
+           })
+    }
+</script>
+{% endblock %}
