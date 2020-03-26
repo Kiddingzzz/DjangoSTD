@@ -53,6 +53,7 @@ class Course(models.Model):
     courseClassType=models.CharField(max_length=500,null=True)             #课程类别
     courseClassNum=models.IntegerField(null=True)                          #课时数量
 
+
 class Score(models.Model):
     id = models.AutoField(primary_key=True)
     scoreStudent = models.ForeignKey(Student, on_delete=models.CASCADE)    # 成绩与学生一对多

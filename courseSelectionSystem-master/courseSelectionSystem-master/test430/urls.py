@@ -37,5 +37,6 @@ urlpatterns = [
     url(r'^adm2/', views.adm2),
     url(r'^stumycourse/', views.stumycourse),
     url(r'^stuinfo/', views.stuinfo),
+    url(r'^teacherinfo/', views.teacherinfo),
     url('deleClass/',views.deleClass),
 ]

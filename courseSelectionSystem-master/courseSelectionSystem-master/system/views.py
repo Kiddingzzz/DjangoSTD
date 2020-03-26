@@ -36,6 +36,16 @@ def stuinfo(request):
     pass
     return render(request, 'login/stuinfo.html')
 
+def teacherinfo(request):
+    teacher_id = request.session['user_id']
+    print(teacher_id)
+    new_teainfo = TeacherInfer.objects.filter(userid_id=teacher_id)
+    print(new_teainfo)
+    context = {
+        "new_teainfo": new_teainfo,
+    }
+    return render(request, 'login/teacherinfo.html',context=context)
+
 def tea1(request):
     if request.method == "POST":
         courseName = request.POST.get("courseName")
@@ -175,14 +185,14 @@ def stu3(request):
     return render(request, 'login/stu3.html', context=context)
 
 def stu14(request):
+    teacher = request.session['user_id']
     if request.method == "POST":
-        teacher = request.session['user_id']
         print(teacher)
         Teacher_form = TeacherModifyForm(request.POST)
 
         if Teacher_form.is_valid():  # 获取数据
             new_usera = TeacherInfer.objects.create(userid_id=teacher)
-            new_usera.username = Teacher_form.cleaned_data['username']
+            new_usera.name = Teacher_form.cleaned_data['username']
             new_usera.sex = Teacher_form.cleaned_data['sex']
             new_usera.zhengzhimianmao = Teacher_form.cleaned_data['zhengzhi']
             new_usera.canjiaTime = Teacher_form.cleaned_data['joinTime']

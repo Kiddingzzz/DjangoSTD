@@ -176,10 +176,8 @@
                     <td>{{ course.courseCredit}}</td>
                     <td>{{ course.courseTeacher.teacherName}}</td>
                      <td>
-                           <input type="submit" value="修改"   >
-
-
-                         <button  type="submit" onclick="de({{ course.id}})" formmethod="post">删除</button>
+                           <button type="submit"  onclick="de({{ course.id}})" formmethod="post" >修改</button>
+                           <button  type="submit" onclick="de({{ course.id}})" formmethod="post">删除</button>
                      </td>
             </tr>
             {% endfor %}
