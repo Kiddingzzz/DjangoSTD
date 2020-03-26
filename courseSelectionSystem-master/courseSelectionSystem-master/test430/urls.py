@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^stu1/', views.stu1),
     url(r'^stu2/', views.stu2),
     url(r'^stu3/', views.stu3),
+    url(r'^stu14/', views.stu14),
     url(r'^adm1/', views.adm1),
     url(r'^adm2/', views.adm2),
     url(r'^stumycourse/', views.stumycourse),

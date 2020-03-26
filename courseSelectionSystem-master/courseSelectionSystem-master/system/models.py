@@ -64,3 +64,20 @@ class Score(models.Model):
 class course_student(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+class STDNumber(models.Model):
+    id = models.AutoField(primary_key=True)
+    loginTime = models.DateTimeField(auto_now_add=True)
+    sum = models.IntegerField(null=True)
+    userid = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class TeacherInfer(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=500)
+    sex = models.CharField(max_length=500)
+    zhengzhimianmao = models.CharField(max_length=500)
+    canjiaTime = models.CharField(max_length=500)
+    eduation = models.CharField(max_length=500)
+    exprience = models.CharField(max_length=500)
+    gonghaoid =  models.CharField(max_length=500)
+    userid = models.ForeignKey(User, on_delete=models.CASCADE)

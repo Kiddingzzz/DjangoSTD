@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Course, Teacher, Student, User, Score, course_student
-from .forms import UserForm, RegisterForm
+from .models import Course, Teacher, Student, User, Score, course_student, STDNumber,TeacherInfer
+from .forms import UserForm, RegisterForm,TeacherModifyForm
 from pyecharts.charts import Line
 course_reg_id = 0
 student_inform_reg = []
@@ -174,6 +174,24 @@ def stu3(request):
     }
     return render(request, 'login/stu3.html', context=context)
 
+def stu14(request):
+    if request.method == "POST":
+        teacher = request.session['user_id']
+        print(teacher)
+        Teacher_form = TeacherModifyForm(request.POST)
+
+        if Teacher_form.is_valid():  # 获取数据
+            new_usera = TeacherInfer.objects.create(userid_id=teacher)
+            new_usera.username = Teacher_form.cleaned_data['username']
+            new_usera.sex = Teacher_form.cleaned_data['sex']
+            new_usera.zhengzhimianmao = Teacher_form.cleaned_data['zhengzhi']
+            new_usera.canjiaTime = Teacher_form.cleaned_data['joinTime']
+            new_usera.eduation = Teacher_form.cleaned_data['eduation']
+            new_usera.exprience = Teacher_form.cleaned_data['experience']
+            new_usera.gonghaoid = Teacher_form.cleaned_data['gonghaoid']
+            new_usera.save()
+    Teacher_form = TeacherModifyForm()
+    return render(request, 'login/stu14.html', locals())
 
 def adm1(request):
     if request.method == "GET":
@@ -263,6 +281,13 @@ def login(request):
                     if user.kind == 'admin':
                         return redirect('/index_a/')
                     else:
+                        stdN = STDNumber.objects.all().order_by('-id')[0]
+                        # stdN = STDNumber.objects.filleter.order_by(userid_id=user.id)[0]
+                        tongjiNumber = stdN.sum + 1
+                        stdNumber = STDNumber.objects.create(userid_id=user.id)  # 增加时间和次数
+                        stdNumber.sum = tongjiNumber
+                        stdNumber.save()
+
                         return redirect('/index_s/')
                 else:
                     message = "密码不正确！"
